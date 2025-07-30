@@ -3,14 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <title>Đọc văn bản bằng Google TTS</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 100%;
+      max-width: 500px;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    textarea {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+      resize: vertical;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    audio {
+      width: 100%;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Đọc văn bản tiếng Việt</h1>
-  <form id="tts-form">
-    <textarea id="tts-text" rows="6" cols="60" placeholder="Nhập nội dung cần đọc..."></textarea><br/>
-    <button type="submit">Đọc</button>
-  </form>
-  <audio id="tts-audio" controls style="margin-top:20px; display:none;"></audio>
+  <div class="container">
+    <h1>Đọc văn bản tiếng Việt</h1>
+    <form id="tts-form">
+      <textarea id="tts-text" rows="6" cols="60" placeholder="Nhập nội dung cần đọc..."></textarea><br/>
+      <button type="submit">Đọc</button>
+    </form>
+    <audio id="tts-audio" controls style="margin-top:20px; display:none;"></audio>
+  </div>
   <script>
     const form = document.getElementById('tts-form');
     const textarea = document.getElementById('tts-text');
