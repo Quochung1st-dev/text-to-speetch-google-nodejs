@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đọc văn bản bằng Google TTS</title>
+</head>
+<body>
+  <h1>Đọc văn bản tiếng Việt</h1>
+  <form id="tts-form">
+    <textarea id="tts-text" rows="6" cols="60" placeholder="Nhập nội dung cần đọc..."></textarea><br/>
+    <button type="submit">Đọc</button>
+  </form>
+  <audio id="tts-audio" controls style="margin-top:20px; display:none;"></audio>
+  <script>
+    const form = document.getElementById('tts-form');
+    const textarea = document.getElementById('tts-text');
+    const audio = document.getElementById('tts-audio');
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      audio.style.display = 'none';
+      audio.src = '';
+      const text = textarea.value;
+      if (!text.trim()) {
+        alert('Vui lòng nhập nội dung!');
+        return;
+      }
+      const res = await fetch('http://localhost:3000/api/tts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ text })
+      });
+      if (!res.ok) {
+        alert('Lỗi server!');
+        return;
+      }
+      const blob = await res.blob();
+      audio.src = URL.createObjectURL(blob);
+      audio.style.display = 'block';
+      audio.play();
+    });
+  </script>
+</body>
+</html>
